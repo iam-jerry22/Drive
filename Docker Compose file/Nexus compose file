@@ -1,0 +1,33 @@
+version: "2.2"
+
+services:
+
+  nexus:
+
+    image: ubuntu:20.04
+
+    command:
+
+      - /bin/bash
+
+      - -c
+
+      - |
+
+        apt update
+
+        apt install openjdk-8-jdk-y
+
+        apt install curl -y
+
+        curl -O https://sonatype-download.global.ssl.fastly.net/repository/downloads-prod-group/3/nexus-3.29.2-02-unix.tar.gz
+
+        mkdir /opt/nexus
+
+        tar xzf nexus-3.29.2-02-unix.tar.gz -C /opt/nexus --strip-components=1
+
+        /opt/nexus/bin/nexus start && /bin/bash
+
+    ports:
+
+      - "8081:8081"
